@@ -1,0 +1,89 @@
+
+from tkinter import *
+import time
+root = Tk()
+def cacl(input_str):
+    if "+" in input_str:
+        rt = input_str.split("+")
+        return int(rt[0]) + int(rt[1])
+    elif "-" in input_str:
+        rt = input_str.split("-")
+        return int(rt[0]) - int(rt[1])
+    elif "*" in input_str:
+        rt = input_str.split("*")
+        return int(rt[0]) * int(rt[1])
+    elif "/" in input_str:
+        rt = input_str.split("/")
+        return int(rt[0]) / int(rt[1])
+
+def add(a,n):
+    
+    a.append(n)
+    return a
+#def callback(n):
+#    print(n)
+
+#def callback1(n):
+#    print(n)
+class App:
+    def __init__(self, master):
+        
+        frame1 = Frame(master)
+        frame1.pack()
+        frame = Frame(master)
+        frame.pack()
+        Button(frame, text="1",command=lambda: self.callback(1), width=6).grid(row=0,column=0)
+        Button(frame, text="2",command=lambda: self.callback(2), width=6 ).grid(row=0,column=1)
+        Button(frame, text="3",command=lambda: self.callback(3), width=6 ).grid(row=0,column=2)
+        Button(frame, text="4",command=lambda: self.callback(4), width=6 ).grid(row=1,column=0)
+        Button(frame, text="5",command=lambda: self.callback(5), width=6 ).grid(row=1,column=1)
+        Button(frame, text="6",command=lambda: self.callback(6), width=6 ).grid(row=1,column=2)
+        Button(frame, text="7",command=lambda: self.callback(7), width=6 ).grid(row=2,column=0)
+        Button(frame, text="8",command=lambda: self.callback(8), width=6 ).grid(row=2,column=1)
+        Button(frame, text="9",command=lambda: self.callback(9), width=6 ).grid(row=2,column=2)
+        Button(frame, text="0",command=lambda: self.callback(0), width=6 ).grid(row=3,column=0)
+        Button(frame, text="+",command=lambda: self.callback("+"), width=6 ).grid(row=3,column=1)
+        Button(frame, text="-",command=lambda: self.callback("-"), width=6 ).grid(row=3,column=2)
+        Button(frame, text="*",command=lambda: self.callback("*"), width=6 ).grid(row=4,column=1)
+        Button(frame, text="/",command=lambda: self.callback("/"), width=6 ).grid(row=4,column=2)
+        Button(frame, text="=", command=self.say_hi, width=6).grid(row=4,column=0)
+        #输入数据
+        w = Label(frame1,text="输入数据")
+        w.pack()
+        #输入框
+        ev = StringVar()
+        self.e = Entry(frame1, textvariable=ev)
+        ev.set("")
+        self.ev = ev
+        self.e.pack()
+        #计算结果
+        w1 = Label(frame1,text="计算结果")
+        w1.pack()
+        #结果框
+        v = StringVar()
+        e1 = Entry(frame1, textvariable=v)
+        v.set("")
+        self.v = v
+        e1.pack()
+        #flag
+        
+    def say_hi(self):
+        print("hi there, everyone!",self.e.get())
+        input_str = self.e.get()
+        self.v.set(cacl(input_str))
+        
+    def callback(self,n):
+        print(n)
+        if(self.v.get()):
+            self.ev.set("")
+            self.v.set("")
+        q = self.ev.get()
+        q = q + str(n)
+        self.ev.set(q)
+    def callback1(self,n):
+        print(n)
+        q = self.ev.get()
+        q = q + str(n)
+        self.ev.set(q)
+app = App(root)
+root.mainloop()
